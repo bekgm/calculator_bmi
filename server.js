@@ -9,19 +9,15 @@ function getBmiCategory(bmi) {
     let color = ''; 
 
     if (bmi < 18.5) {
-        // Underweight: Оранжевый для предупреждения
         category = 'Underweight';
         color = 'orange'; 
     } else if (bmi < 24.9) {
-        // Normal weight: Зеленый
         category = 'Normal weight';
         color = 'green';
     } else if (bmi < 29.9) {
-        // Overweight: Желтый, как в примере требования
         category = 'Overweight';
-        color = 'yellow'; // <--- Соответствует требованию 'yellow' для Overweight
+        color = 'yellow';
     } else { 
-        // Obese: Красный
         category = 'Obese';
         color = 'red';
     }
@@ -93,13 +89,13 @@ app.get('/', (req, res) => {
             <div class="container">
                 <h1>Калькулятор ИМТ</h1>
                 <form action="/calculate-bmi" method="POST">
-                    <label for="weight">Вес (кг):</label>
-                    <input type="number" id="weight" name="weight" step="0.1" placeholder="Например, 70.5" required>
+                    <label for="weight">Weight (kg):</label>
+                    <input type="number" id="weight" name="weight" step="0.1" placeholder="Example, 70.5" required>
                     
-                    <label for="height">Рост (м):</label>
-                    <input type="number" id="height" name="height" step="0.01" placeholder="Например, 1.75" required>
+                    <label for="height">Height (м):</label>
+                    <input type="number" id="height" name="height" step="0.01" placeholder="Example, 1.75" required>
                     
-                    <button type="submit">Рассчитать ИМТ</button>
+                    <button type="submit">Calculate</button>
                 </form>
             </div>
         </body>
@@ -114,9 +110,9 @@ app.post('/calculate-bmi', (req, res) => {
     if (isNaN(weight) || isNaN(height) || height <= 0 || weight <= 0) {
         return res.status(400).send(`
             <div style="font-family: Arial; padding: 20px; text-align: center;">
-                <h1>Ошибка Ввода Данных</h1>
-                <p style="color: red; font-size: 18px;">Пожалуйста, введите корректные положительные числа для веса и роста.</p>
-                <a href="/" style="display: inline-block; margin-top: 20px; padding: 10px 15px; background-color: #007bff; color: white; text-decoration: none; border-radius: 4px;">Вернуться к форме</a>
+                <h1>Wrong data</h1>
+                <p style="color: red; font-size: 18px;">Please, enter correct values!.</p>
+                <a href="/" style="display: inline-block; margin-top: 20px; padding: 10px 15px; background-color: #007bff; color: white; text-decoration: none; border-radius: 4px;">Back to form</a>
             </div>
         `);
     }
@@ -131,7 +127,7 @@ app.post('/calculate-bmi', (req, res) => {
         <html lang="ru">
         <head>
             <meta charset="UTF-8">
-            <title>Результат ИМТ</title>
+            <title>Result</title>
             <style>
                 body {
                     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -159,7 +155,7 @@ app.post('/calculate-bmi', (req, res) => {
                     margin-top: 20px;
                     padding: 15px;
                     border-radius: 4px;
-                    color: white; /* Цвет текста по умолчанию белый */
+                    color: white;
                 }
                 .result-value {
                     font-size: 48px;
@@ -170,11 +166,10 @@ app.post('/calculate-bmi', (req, res) => {
                     font-size: 20px;
                     font-weight: 600;
                 }
-                /* ИСПРАВЛЕННЫЕ КЛАССЫ СТИЛЕЙ */
-                .green { background-color: #28a745; } /* Normal */
-                .orange { background-color: #f39c12; } /* Underweight - Оранжевый */
-                .yellow { background-color: #ffc107; color: #333; } /* Overweight - Желтый, черный текст для контраста */
-                .red { background-color: #dc3545; } /* Obese */
+                .green { background-color: #28a745; } 
+                .orange { background-color: #f39c12; } 
+                .yellow { background-color: #d7ff0fff; color: #333; }
+                .red { background-color: #dc3545; }
                 
                 .back-link {
                     display: inline-block;
@@ -193,13 +188,13 @@ app.post('/calculate-bmi', (req, res) => {
         </head>
         <body>
             <div class="container">
-                <h1>Результат Расчета ИМТ</h1>
-                <p>Вес: ${weight} кг | Рост: ${height} м</p>
+                <h1>Result of calculating BMT</h1>
+                <p>Weight: ${weight} kg | Height: ${height} cm</p>
                 <div class="result-box ${color}">
                     <div class="result-value">${roundedBmi}</div>
                     <div class="result-category">${category}</div>
                 </div>
-                <a href="/" class="back-link">Рассчитать снова</a>
+                <a href="/" class="back-link">Calculate again</a>
             </div>
         </body>
         </html>
