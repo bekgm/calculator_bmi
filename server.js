@@ -59,7 +59,7 @@ app.post('/calculate-bmi', (req, res) => {
     if (isNaN(weight) || isNaN(height) || height <= 0 || weight <= 0) {
         return res.status(400).send(`
             <div style="font-family: Arial; padding: 20px; text-align: center;">
-                <h1>Wrong data</h1>
+                <h1>Wrong data!</h1>
                 <p style="color: red; font-size: 18px;">Please, enter correct values!</p>
                 <a href="/" style="display: inline-block; margin-top: 20px; padding: 10px 15px; background-color: #007bff; color: white; text-decoration: none; border-radius: 4px;">Back to form</a>
             </div>
