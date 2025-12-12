@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
         </head>
         <body>
             <div class="container">
-                <h1>Калькулятор ИМТ</h1>
+                <h1>Calculator BMI</h1>
                 <form action="/calculate-bmi" method="POST">
                     <label for="weight">Weight (kg):</label>
                     <input type="number" id="weight" name="weight" step="0.1" required>
