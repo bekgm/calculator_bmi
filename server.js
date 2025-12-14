@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
 
 function getBmiCategory(bmi) {
@@ -12,22 +12,23 @@ function getBmiCategory(bmi) {
     if (bmi < 18.5) {
         category = 'Underweight';
         color = 'orange';
-    } else if (bmi < 24.9) {
+    } else if (bmi >= 18.5 && bmi < 24.9) {
         category = 'Normal weight';
         color = 'green';
-    } else if (bmi < 29.9) {
+    } else if (bmi >=25 && bmi < 29.9) {
         category = 'Overweight';
         color = 'yellow';
     } else {
         category = 'Obese';
         color = 'red';
     }
-    return { category, color };
+    return {category,color};
+
 }
 
 app.get('/', (req, res) => {
     res.send(`
-        <!DOCTYPE html>
+       <!DOCTYPE html>
         <html lang="ru">
         <head>
             <meta charset="UTF-8">
